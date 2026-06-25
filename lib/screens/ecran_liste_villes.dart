@@ -2,6 +2,7 @@ import 'package:flutter/material.dart ';
 import 'package:provider/provider.dart';
 import '../viewmodels/ville_viewmodel.dart';
 import '../models/ville.dart';
+import 'ecran_ajouter_ville.dart';
 class EcranListeVilles extends StatelessWidget {
   const EcranListeVilles ({ super.key }) ;
   @override
@@ -13,7 +14,20 @@ class EcranListeVilles extends StatelessWidget {
       appBar : AppBar (
         title : Text ( ' Choisir une ville ') ,
         backgroundColor : Colors.blue ,
-        foregroundColor : Colors.white ,) ,
+        foregroundColor : Colors.white ,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.add),
+            tooltip: 'Ajouter une ville',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => EcranAjouterVille()),
+              );
+            },
+          ),
+        ],
+      ),
       body : ListView . builder (
         itemCount : vm.villes.length ,
         itemBuilder : ( context , index ) {

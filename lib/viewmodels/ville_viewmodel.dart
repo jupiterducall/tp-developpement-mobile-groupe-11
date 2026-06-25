@@ -33,4 +33,9 @@ class VilleViewModel extends ChangeNotifier {
     _villeSelectionnee = ville ;
     notifyListeners () ;
   }
+  //Ajouter la ville
+  void ajouterVille(Ville ville) {
+    _villes.add(ville);
+    notifyListeners();
+  }
 }
