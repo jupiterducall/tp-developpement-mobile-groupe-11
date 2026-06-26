@@ -32,6 +32,7 @@ class EcranListeVilles extends StatelessWidget {
         itemCount : vm.villes.length ,
         itemBuilder : ( context , index ) {
           final ville = vm.villes[index];
+          final ville1 = vm.villes[1];
           final estSelectionnee = ville.nom == vm.villeSelectionnee ?. nom ;
 
           return ListTile (
@@ -53,9 +54,15 @@ class EcranListeVilles extends StatelessWidget {
                 : null ,
             onTap : () {
 // Utiliser context . read () pour appeler une action
-              context.read<VilleViewModel>().selectionnerVille (ville);
-              Navigator.pop(context) ; // revenir a l ' ecranprecedent
-            } ,
+              if(TextButton == 'Parakou'){
+                context.read<VilleViewModel>().selectionnerVille (ville1);
+                Navigator.pop(context) ; // revenir a l ' ecranprecedent
+              }
+              else{
+                context.read<VilleViewModel>().selectionnerVille (ville);
+                Navigator.pop(context) ; // revenir a l ' ecranprecedent
+              }
+            },
           ) ;
         } ,
       ) ,
