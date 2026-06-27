@@ -3,11 +3,13 @@ import '../models/meteo_data.dart';
 import '../models/prevision_jour.dart';
 class MeteoService {
 // Coordonnees GPS des villes
-  static const Map < String , List < double > > _coords = {
+  static const Map < String , List < double > > coords = {
     'Cotonou': [6.3703 , 2.3912] ,
     'Parakou': [9.3370 , 2.6283] ,
     'Lagos': [6.4541 , 3.3947] ,
     'Abidjan': [5.3600 , -4.0083] ,
+    'Lomé':    [6.1372, 1.2125],
+    'Dakar':   [14.7167, -17.4677],
   };
 
   // Instance de dio configuree
@@ -28,16 +30,16 @@ class MeteoService {
 
   // Recuperer la meteo d ' une ville
   Future<(MeteoData?, List<PrevisionJour>)> getMeteo(String nomVille) async {
-    final coords = _coords[nomVille];
-    if (coords == null) {
+    final villeCoords = coords[nomVille];
+    if (villeCoords == null) {
       print('Ville inconnue : $nomVille');
       return (null, <PrevisionJour>[]);
     }
     try {
       final response = await _dio.get('/forecast',
           queryParameters: {
-            'latitude':  coords[0],
-            'longitude': coords[1],
+            'latitude':  villeCoords[0],
+            'longitude': villeCoords[1],
             'current':   'temperature_2m,relative_humidity_2m,weathercode',
             'daily':     'temperature_2m_max,temperature_2m_min,weathercode',
             'timezone':  'Africa/Lagos',
